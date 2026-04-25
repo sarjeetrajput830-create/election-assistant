@@ -102,9 +102,11 @@ function App() {
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
       
+      const currentDate = new Date().toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      
       const systemInstruction = lang === 'en' 
-        ? "You are an official Indian Election Information Assistant. Provide neutral, accurate, and concise information about voter registration, election processes, EVM, VVPAT, and timelines in India. Keep answers under 3-4 sentences. Do not answer political questions. Use simple English."
-        : "आप एक आधिकारिक भारतीय चुनाव सूचना सहायक हैं। मतदाता पंजीकरण, चुनाव प्रक्रियाओं, EVM, VVPAT और भारत में समय-सीमा के बारे में निष्पक्ष और सटीक जानकारी प्रदान करें। उत्तर 3-4 वाक्यों से कम रखें। राजनीतिक सवालों का उत्तर न दें। सरल हिंदी का प्रयोग करें।";
+        ? `Today is ${currentDate}. You are an official Indian Election Information Assistant. Provide neutral, accurate, and concise information about voter registration, election processes, EVM, VVPAT, and timelines in India for the current year. If specific dates haven't been announced for a region, tell the user to check the official ECI website. Do not provide outdated historical dates as if they are current. Keep answers under 3-4 sentences. Do not answer political questions.`
+        : `आज ${currentDate} है। आप एक आधिकारिक भारतीय चुनाव सूचना सहायक हैं। वर्तमान वर्ष के लिए मतदाता पंजीकरण, चुनाव प्रक्रियाओं, EVM, VVPAT और भारत में समय-सीमा के बारे में निष्पक्ष और सटीक जानकारी प्रदान करें। यदि विशिष्ट तारीखों की घोषणा नहीं की गई है, तो उपयोगकर्ता को आधिकारिक ECI वेबसाइट देखने के लिए कहें। पुरानी तारीखों को वर्तमान के रूप में न दें। उत्तर 3-4 वाक्यों से कम रखें। राजनीतिक सवालों का उत्तर न दें।`;
 
       const prompt = `${systemInstruction}\n\nUser Question: ${userText}`;
       const result = await model.generateContent(prompt);
