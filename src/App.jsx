@@ -70,6 +70,12 @@ function App() {
     window.speechSynthesis.speak(utterance);
   };
 
+  const stopSpeaking = () => {
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+  };
+
   const toggleListening = () => {
     if (isListening) {
       recognitionRef.current?.stop();
@@ -248,6 +254,9 @@ function App() {
         <div className="chat-interface">
           <div className="chat-header">
             <h2>{lang === 'en' ? "Chat with Assistant" : "सहायक के साथ चैट करें"}</h2>
+            <button className="stop-speech-btn" onClick={stopSpeaking} title={lang === 'en' ? "Stop Speaking" : "बोलना बंद करें"}>
+              🛑 {lang === 'en' ? "Stop Voice" : "आवाज़ रोकें"}
+            </button>
           </div>
           
           <div className="chat-box">

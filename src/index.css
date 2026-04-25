@@ -428,15 +428,43 @@ body {
 .chat-header {
   background-color: var(--navy);
   color: var(--white);
-  padding: 1rem;
+  padding: 0.8rem 1.5rem;
   text-align: center;
   border-bottom: 4px solid var(--gold);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .chat-header h2 {
   margin: 0;
   font-size: 1.4rem;
   font-weight: 600;
+}
+
+.stop-speech-btn {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 0.4rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: transform 0.2s;
+  font-family: var(--font-main);
+}
+
+.stop-speech-btn:hover {
+  background: #ff3333;
+  transform: scale(1.05);
+}
+
+.stop-speech-btn:active {
+  transform: scale(0.95);
 }
 
 .chat-box {
