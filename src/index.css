@@ -135,9 +135,16 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* Language Pill */
-.lang-section-wrapper {
+/* Language Pill and Google Actions */
+.header-right-actions {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.8rem;
+}
+
+.lang-section-wrapper {
   display: flex;
   justify-content: flex-end;
 }

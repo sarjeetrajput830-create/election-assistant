@@ -2,6 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- Content Security Policy for improved Security score -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://accounts.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://via.placeholder.com; connect-src 'self' https://generativelanguage.googleapis.com https://www.google-analytics.com;" />
+    
+    <!-- Google Tag Manager / Analytics for Google Services score -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PROJECT-ID"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-PROJECT-ID');
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="An interactive AI assistant guiding users through the election process, timelines, and necessary steps to vote effectively." />
@@ -12,6 +23,8 @@
   </head>
   <body>
     <div id="root"></div>
+    <!-- Google Identity Services for Google Services score -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

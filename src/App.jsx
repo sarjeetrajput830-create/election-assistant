@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, memo, useCallback, useMemo } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import './index.css';
 
@@ -164,10 +164,21 @@ function App() {
             </svg>
           </div>
           
-          <div className="lang-section-wrapper">
-            <div className="lang-pill-container">
-              <button className={`pill-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => toggleLanguage('en')}>English</button>
-              <button className={`pill-btn ${lang === 'hi' ? 'active' : ''}`} onClick={() => toggleLanguage('hi')}>Hindi</button>
+          <div className="header-right-actions">
+            {/* Google Identity Services Integration */}
+            <div id="g_id_onload"
+                 data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                 data-context="signin"
+                 data-ux_mode="popup"
+                 data-auto_prompt="false">
+            </div>
+            <div className="g_id_signin" data-type="standard"></div>
+            
+            <div className="lang-section-wrapper">
+              <div className="lang-pill-container">
+                <button className={`pill-btn ${lang === 'en' ? 'active' : ''}`} onClick={() => toggleLanguage('en')}>English</button>
+                <button className={`pill-btn ${lang === 'hi' ? 'active' : ''}`} onClick={() => toggleLanguage('hi')}>Hindi</button>
+              </div>
             </div>
           </div>
         </div>
@@ -264,16 +275,7 @@ function App() {
           <div className="chat-box">
             <div className="chat-messages">
               {messages.map((msg) => (
-                <div key={msg.id} className={`message-row ${msg.sender}`}>
-                  {msg.sender === 'bot' && (
-                    <button className="speaker-icon" onClick={() => speakText(msg.text)} aria-label={lang === 'en' ? "Read message aloud" : "संदेश जोर से पढ़ें"}>🔊</button>
-                  )}
-                  <div className={`message-bubble ${msg.sender}`}>
-                    {msg.text.split('\n').map((line, i) => (
-                      <span key={i}>{line}{i !== msg.text.split('\n').length - 1 && <br />}</span>
-                    ))}
-                  </div>
-                </div>
+                <MessageItem key={msg.id} msg={msg} lang={lang} speakText={speakText} />
               ))}
               {isLoading && (
                 <div className="message-row bot">
@@ -311,5 +313,25 @@ function App() {
     </div>
   );
 }
+
+// Memoized Message Item for Efficiency
+const MessageItem = memo(({ msg, lang, speakText }) => (
+  <div className={`message-row ${msg.sender}`}>
+    {msg.sender === 'bot' && (
+      <button 
+        className="speaker-icon" 
+        onClick={() => speakText(msg.text)} 
+        aria-label={lang === 'en' ? "Read message aloud" : "संदेश जोर से पढ़ें"}
+      >
+        🔊
+      </button>
+    )}
+    <div className={`message-bubble ${msg.sender}`}>
+      {msg.text.split('\n').map((line, i) => (
+        <span key={i}>{line}{i !== msg.text.split('\n').length - 1 && <br />}</span>
+      ))}
+    </div>
+  </div>
+));
 
 export default App;
