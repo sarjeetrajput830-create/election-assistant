@@ -356,6 +356,30 @@ body {
   line-height: 1;
 }
 
+.column-flex {
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.maps-link-btn {
+  display: block;
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #4285F4; /* Google Blue */
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.2s;
+  box-sizing: border-box;
+}
+
+.maps-link-btn:hover {
+  background-color: #357ae8;
+}
+
 /* Card 3: Guide Items */
 .guide-body {
   padding: 0.5rem 1rem;

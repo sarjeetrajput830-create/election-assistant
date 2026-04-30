@@ -20,9 +20,14 @@
   - **Google Gemini API**: Advanced generative responses.
   - **Google Identity**: One-Tap/Sign-In integration.
   - **Google Analytics**: Real-time user interaction tracking.
+  - **Google Maps**: Integrated booth finder for alignment.
   - **Google Cloud Run**: Highly available containerized hosting.
+  - **Google Cloud Logging**: Structured JSON logging for monitoring.
 - 🎨 **Premium UI**: Modern, responsive design featuring Indian tricolor aesthetics and smooth micro-animations.
-- ⚡ **Efficiency**: Memoized components and optimized rendering paths for maximum performance.
+- ⚡ **Efficiency & PWA**:
+  - **Service Worker**: PWA support for offline capability.
+  - **Nginx Optimization**: Gzip compression and browser caching.
+  - **React Optimization**: Memoized components and optimized rendering.
 
 ---
 

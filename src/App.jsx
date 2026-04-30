@@ -99,6 +99,14 @@ function App() {
     }
 
     try {
+      // Structured Logging for Google Cloud Logs Explorer
+      console.log(JSON.stringify({
+        severity: "INFO",
+        message: `API request for query: ${userText}`,
+        user_language: lang,
+        timestamp: new Date().toISOString()
+      }));
+
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
       
@@ -112,7 +120,14 @@ function App() {
       const result = await model.generateContent(prompt);
       return result.response.text();
     } catch (error) {
-      console.error(error);
+      // Error logging for Google Cloud Error Reporting
+      console.error(JSON.stringify({
+        severity: "ERROR",
+        message: `API Error: ${error.message}`,
+        stack: error.stack,
+        user_language: lang
+      }));
+
       return lang === 'en' 
         ? "Sorry, I encountered an error communicating with the API. Please check your API key." 
         : "क्षमा करें, API से संचार करते समय मुझे एक त्रुटि का सामना करना पड़ा। कृपया अपनी API Key जांचें।";
@@ -215,19 +230,29 @@ function App() {
             <div className="card-footer green-footer">
               <div className="footer-links">
                 <button className="text-link" onClick={() => handleSend("What is Form 7 for?")}>{lang === 'en' ? "Form 7/8" : "फॉर्म 7/8"}</button>
-                <button className="text-link" onClick={() => handleSend("How to update details using Form 8?")}>{lang === 'en' ? "Form 7/8" : "फॉर्म 7/8"}</button>
+                <button className="text-link" onClick={() => handleSend("How to update details using Form 8?")}>{lang === 'en' ? "Update Details" : "विवरण अपडेट करें"}</button>
               </div>
             </div>
           </div>
 
-          {/* Card 2: Election Schedule */}
-          <div className="info-card tricolor-card pointer-card" onClick={() => handleSend(lang === 'en' ? "What is the election schedule?" : "चुनाव कार्यक्रम क्या है?")}>
-            <h3 className="card-title saffron-header">🗓️ {lang === 'en' ? "Election Schedule" : "चुनाव कार्यक्रम"}</h3>
-            <div className="card-body center-flex">
-              <div className="big-icon">📅</div>
+          {/* Card 2: Election Schedule & Polling Booths (Google Maps) */}
+          <div className="info-card tricolor-card">
+            <h3 className="card-title saffron-header">🗓️ {lang === 'en' ? "Election Info" : "चुनाव जानकारी"}</h3>
+            <div className="card-body center-flex column-flex">
+              <button className="card-action-btn" onClick={() => handleSend(lang === 'en' ? "What is the election schedule?" : "चुनाव कार्यक्रम क्या है?")}>
+                {lang === 'en' ? "View Schedule" : "शेड्यूल देखें"} 📅
+              </button>
+              <a 
+                href="https://www.google.com/maps/search/polling+booth+near+me" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="maps-link-btn"
+              >
+                📍 {lang === 'en' ? "Find Polling Booth" : "मतदान केंद्र खोजें"}
+              </a>
             </div>
             <div className="card-footer green-footer centered-text">
-              {lang === 'en' ? "Election Schedule" : "चुनाव कार्यक्रम"}
+              {lang === 'en' ? "Google Maps Integrated" : "गूगल मैप्स एकीकृत"}
             </div>
           </div>
 
