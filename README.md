@@ -8,12 +8,14 @@
 
 ## ✨ Features
 
-- 🤖 **AI-Powered Chat**: Real-time answers to election queries using Google Gemini 1.5 Flash.
+- 🤖 **AI-Powered Chat**: Real-time answers to election queries using **Google Gemini 1.5 Flash**.
 - 🌐 **Bilingual Support**: Full interface and interaction support for **English** and **Hindi**.
 - 🎤 **Voice Interaction**: 
   - **Speech-to-Text**: Ask questions using your voice.
   - **Text-to-Speech**: Listen to the assistant's responses.
 - 📝 **Voter Resources**: Quick access to information about Voter Forms (Form 6, 7, 8), EVM/VVPAT guides, and election schedules.
+- 🧪 **Automated Testing**: Robust test suite with **Vitest** and **React Testing Library** for core application logic.
+- ♿ **Inclusive Design**: ARIA-compliant interface ensuring accessibility for all users.
 - 🎨 **Premium UI**: Modern, responsive design featuring Indian tricolor aesthetics and smooth micro-animations.
 - 🐳 **Cloud Ready**: Fully dockerized and optimized for deployment on **Google Cloud Run**.
 
@@ -100,7 +102,24 @@ sequenceDiagram
    npm run dev
    ```
 
----
+## 🧪 Testing
+
+The project includes a comprehensive test suite using **Vitest** and **React Testing Library**.
+
+- **Run tests**: `npm test`
+- **Coverage**: Includes component rendering, language switching, API key handling, and message flow.
+
+## ♿ Accessibility
+
+Built with accessibility in mind:
+- **ARIA Labels**: All interactive elements (buttons, inputs) include descriptive ARIA labels in both English and Hindi.
+- **Semantic HTML**: Proper header hierarchy and semantic tags.
+- **Visual Cues**: Clear focus states and loading indicators.
+
+## 🛡️ Security
+
+- **Client-side API Handling**: The Gemini API key is handled directly in the client to ensure no intermediate server logs your keys.
+- **Input Sanitization**: React's built-in XSS protection for message rendering.
 
 ## ☁️ Deployment (Google Cloud Run)
 

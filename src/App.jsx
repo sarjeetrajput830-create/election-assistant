@@ -153,7 +153,7 @@ function App() {
           </div>
           
           <div className="center-chakra">
-            <svg viewBox="0 0 100 100" width="80" height="80">
+            <svg viewBox="0 0 100 100" width="80" height="80" aria-hidden="true">
               <circle cx="50" cy="50" r="48" fill="none" stroke="#fff" strokeWidth="2" />
               <circle cx="50" cy="50" r="10" fill="none" stroke="#fff" strokeWidth="2" />
               <g stroke="#fff" strokeWidth="1.5">
@@ -188,7 +188,7 @@ function App() {
               onChange={(e) => setApiKey(e.target.value)} 
             />
           </div>
-          <button className="settings-btn">⚙️</button>
+          <button className="settings-btn" aria-label={lang === 'en' ? "Settings" : "सेटिंग्स"}>⚙️</button>
         </div>
 
         {/* 4 Cards Grid */}
@@ -266,7 +266,7 @@ function App() {
               {messages.map((msg) => (
                 <div key={msg.id} className={`message-row ${msg.sender}`}>
                   {msg.sender === 'bot' && (
-                    <button className="speaker-icon" onClick={() => speakText(msg.text)}>🔊</button>
+                    <button className="speaker-icon" onClick={() => speakText(msg.text)} aria-label={lang === 'en' ? "Read message aloud" : "संदेश जोर से पढ़ें"}>🔊</button>
                   )}
                   <div className={`message-bubble ${msg.sender}`}>
                     {msg.text.split('\n').map((line, i) => (
@@ -297,12 +297,11 @@ function App() {
               />
               <button 
                 type="button" 
-                className={`mic-btn ${isListening ? 'listening' : ''}`} 
-                onClick={toggleListening}
+                aria-label={lang === 'en' ? (isListening ? "Stop listening" : "Start voice input") : (isListening ? "सुनना बंद करें" : "वॉयस इनपुट शुरू करें")}
               >
                 🎤
               </button>
-              <button type="submit" className="send-btn" disabled={isLoading || !inputValue.trim()}>
+              <button type="submit" className="send-btn" disabled={isLoading || !inputValue.trim()} aria-label={lang === 'en' ? "Send message" : "संदेश भेजें"}>
                 ➤
               </button>
             </form>
